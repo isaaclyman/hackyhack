@@ -1,0 +1,10 @@
+.file-picker-label {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.file-picker-input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
