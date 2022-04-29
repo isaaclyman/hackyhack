@@ -16,6 +16,7 @@ USE-SHAPE {
     HEIGHT 100
 }
 
+RESET-CONTEXT
 USE-SHAPE {
     RECTANGLE-ROUNDED
     NAME "right"
@@ -54,6 +55,7 @@ POPUP {
 }
 
 IF "$avoidDetection" EQUALS="yes" {
+    RESET-CONTEXT
     USE-SHAPE {
         BLANK
         LAYER 10

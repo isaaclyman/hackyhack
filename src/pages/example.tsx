@@ -1,10 +1,10 @@
 import raw from 'raw.macro'
-import RenderHack from './renderHack'
+import { Navigate } from 'react-router-dom'
 
 const ReadmeExample = raw('../examples/readme-example.kdl')
 
 export default function Example() {
   return (
-    <RenderHack scene={ReadmeExample} />
+    <Navigate to="/hack" state={{script: ReadmeExample}} />
   )
 }

@@ -17,15 +17,16 @@ Hacky hack is a web application that makes it look like you're hacking a compute
     - [HERE-IS](#here-is)
     - [IF](#if)
     - [POPUP](#popup)
-    - [PROMPT](#prompt)
     - [PROGRESS](#progress)
+    - [PROMPT](#prompt)
+    - [RESET-CONTEXT](#reset-context)
     - [SET-COLOR](#set-color)
     - [SET $VARIABLE](#set-variable)
     - [SLEEP](#sleep)
+    - [TEXT](#text)
     - [USE-SHAPE](#use-shape)
     - [USE "name"](#use-name)
-    - [USE-NOTHING](#use-nothing)
-    - [TEXT](#text)
+  - [Understanding context and layers](#understanding-context-and-layers)
   - [Special text](#special-text)
   - [Wishlist](#wishlist)
   - [Available Scripts](#available-scripts)
@@ -59,6 +60,7 @@ USE-SHAPE {
     HEIGHT 100
 }
 
+RESET-CONTEXT
 USE-SHAPE {
     RECTANGLE-ROUNDED
     NAME "right"
@@ -97,6 +99,7 @@ POPUP {
 }
 
 IF "$avoidDetection" EQUALS="yes" {
+    RESET-CONTEXT
     USE-SHAPE {
         BLANK
         LAYER 10
@@ -207,7 +210,8 @@ Available `TEXT` animations:
 
 - `"NONE"`: all text appears instantly.
 - `"LINE 100"`: text appears one line at a time with a default 100 millisecond delay between lines.
-- `"TYPE 15"`: text appears one character at a time, as though someone were typing it, with a default 15 millisecond delay between characters.
+- `"TYPE 15"`: text appears one character at a time, as though someone were typing it, with a default 15 millisecond delay between characters. When one line is finished typing, the next line will begin.
+- `"LINE-TYPE 100 15"`: a combination of `LINE` and `TYPE`. In this case each character will take 15 milliseconds to type and each line will begin typing 100 milliseconds apart, even if the previous line isn't finished. This allows multiple lines to type out at the same time.
 
 ### CLEAR
 
@@ -310,14 +314,6 @@ Shows a popup box (like a dialog or modal). If you use the `POPUP` command witho
 
 A popup cannot be a context for other commands.
 
-### PROMPT
-
-```kdl
-PROMPT "Enter password" "$passwordResponse"
-```
-
-Shows a text prompt. You can provide the prompt message in quotes, followed by the variable you want to put the user's response in. You don't have to provide a variable name if you don't care about the user's response.
-
 ### PROGRESS
 
 ```kdl
@@ -338,6 +334,18 @@ Shows a text-based progress bar that starts at 0% and progresses toward 100%.
   - `SUCCESS` shows a check mark icon.
   - `TEXT "custom text"` shows custom text.
 
+### PROMPT
+
+```kdl
+PROMPT "Enter password" "$passwordResponse"
+```
+
+Shows a text prompt. You can provide the prompt message in quotes, followed by the variable you want to put the user's response in. You don't have to provide a variable name if you don't care about the user's response.
+
+### RESET-CONTEXT
+
+Resets the context. Commands after this will happen inside the screen, not any specific shape.
+
 ### SET-COLOR
 
 Sets the color of text and icons in the current context. The default is cyberpunk blue (#4696f1). You can choose any [CSS color keyword](https://www.w3.org/wiki/CSS/Properties/color/keywords) or a color written in RGB `rgb(255, 255, 255)`, HSL `hsl(0, 100%, 100%)`, or hex `#FFFFFF`.
@@ -357,6 +365,22 @@ SLEEP 1000
 ```
 
 Waits 1000 milliseconds (= one second) before continuing to the next command. If no value is provided, the default is 250 ms.
+
+### TEXT
+
+```kdl
+TEXT r"
+Opening C:\Users\Agent K\Private\Documents...
+Full system access granted!
+Deleting hard drive...
+"
+```
+
+Creates lines of text within a context. 
+
+- Text that's only letters, numbers and spaces can be in `"plain quotes"`.
+- If you want to use special characters (like backslashes) in your text, use `r"raw \quotes"`.
+- If you want to use quotes in your text, use `r#"disambiguated "quotes" like this"#`
 
 ### USE-SHAPE
 
@@ -380,6 +404,7 @@ Creates a shape that can have content or other shapes inside of it.
   - `RECTANGLE-ROUNDED` is a rectangle with rounded corners.
   - `RECTANGLE-BLANK` or `BLANK` is a rectangle with no visible border.
   - `OVAL` is a round shape.
+- `NAME` gives a name to this context so you can refer to it later. See `USE`.
 - `LAYER` is used to place elements above each other. LAYER 1 would appear above LAYER 0 if they overlap. If two overlapping elements are drawn on LAYER 0, it's uncertain which one will be on top (undefined behavior).
 - `LEFT` (required) is used to set the distance (as a percent) from the left edge of the screen. 0 means it starts at the left edge; 50 means it starts halfway across the screen.
 - `TOP` (required) is used to set the distance (as a percent) from the top edge of the screen. 0 means it starts at the top; 50 means it starts halfway down the screen.
@@ -393,25 +418,13 @@ Anything that comes after a `USE-SHAPE` command will happen inside of the shape.
 
 Sets the context to a specific shape. Commands after this will happen inside of the shape whose name was used.
 
-### USE-NOTHING
+## Understanding context and layers
 
-Resets the context. Commands after this will happen inside the screen, not any specific shape.
+A *context* (which is usually the same thing as a *shape*) is an area on the screen where things happen. A context has its own settings (inherited from the context where it was created) and its own internal layers. The `USE` and `USE-SHAPE` commands change the context.
 
-### TEXT
+A *layer* is the depth of something within a context. If two things are in the same context and they overlap, the one with the higher layer will "win" (it will be in front).
 
-```kdl
-TEXT r"
-Opening C:\Users\Agent K\Private\Documents...
-Full system access granted!
-Deleting hard drive...
-"
-```
-
-Creates lines of text within a context. 
-
-- Text that's only letters, numbers and spaces can be in `"plain quotes"`.
-- If you want to use special characters (like backslashes) in your text, use `r"raw \quotes"`.
-- If you want to use quotes in your text, use `r#"disambiguated "quotes" like this"#`
+A layer can't win over a layer in a higher context! For example, if Context A is on Layer 10 and Context B is on Layer 20, nothing inside of Context A can ever be in front of something in Context B.
 
 ## Special text
 
@@ -430,6 +443,7 @@ You can use the following in any text:
 - rotating globe with geolocated pins and tags
 - flat map of a country with geolocated pins/tags
 - file picker (sets a variable with the name of the chosen file)
+- file download animation
 
 ## Available Scripts
 

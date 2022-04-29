@@ -1,5 +1,6 @@
 export enum TextAnimation {
   NONE = "none",
   LINE = "line",
-  TYPE = "type"
+  TYPE = "type",
+  LINETYPE = "line-type"
 }

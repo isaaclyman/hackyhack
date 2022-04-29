@@ -12,8 +12,12 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+html {
   padding: 12px;
+}
+
+body {
+  position: relative;
 }
 
 a, button, input, textarea {
