@@ -1,16 +1,20 @@
 import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler";
 import RenderText from "../renderText";
-import fakeCodes from "../../data/fake-code.resource";
-import Pseudorandom from "../../services/pseudorandom";
 import QueueGroup from "../queueGroup";
-import { useEffect, useState } from "react";
-import { TextAnimation } from "../../types/text.animation";
+import { useState } from "react";
+import usePreRender from "../../hooks/usePreRender";
+import FakeCodeManager from "../../data/fake-code.manager";
 
 const FakeCode: CommandHandler = function (props: CommandHandlerProps) {
-  const rnd = new Pseudorandom(props.settings.seed)
-  const fakeCode = fakeCodes[rnd.getRandomInt(fakeCodes.length)].split('\n')
-  const numberOfLines = props.command.values.filter(val => typeof val === 'number')[0] as number
-  const lines = fakeCode.slice(0, numberOfLines)
+  const [lines, setLines] = useState([] as string[])
+
+  usePreRender(() => {
+    FakeCodeManager.initialize(props.settings.seed)
+    const fakeCode = FakeCodeManager.getFakeCode().split('\n')
+    const numberOfLines = props.command.values.filter(val => typeof val === 'number')[0] as number
+    const newLines = fakeCode.slice(0, numberOfLines)
+    setLines(newLines)
+  })
 
   const [hasCalledDone, setHasCalledDone] = useState(false)
 
@@ -19,7 +23,7 @@ const FakeCode: CommandHandler = function (props: CommandHandlerProps) {
       return
     }
 
-    if (index >= numberOfLines - 1) {
+    if (index >= lines.length - 1) {
       props.done()
       setHasCalledDone(true)
     }

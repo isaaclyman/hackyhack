@@ -31,15 +31,23 @@ function sfc32(a, b, c, d) {
 }
 
 class Pseudorandom {
-  private seedGenerator: () => number
-  private rnd: () => number
+  private isInitialized = false
+  private seedGenerator: () => number = () => 0
+  private rnd: () => number = () => 0
 
-  constructor(seedString: string) {
-    this.seedGenerator = xmur3(seedString)
-    this.rnd = sfc32(this.seedGenerator(), this.seedGenerator(), this.seedGenerator(), this.seedGenerator())
+  initialize(seedString: string) {
+    if (!this.isInitialized) {
+      this.isInitialized = true
+      this.seedGenerator = xmur3(seedString)
+      this.rnd = sfc32(this.seedGenerator(), this.seedGenerator(), this.seedGenerator(), this.seedGenerator())
+    }
   }
 
   getRandom() {
+    if (!this.isInitialized) {
+      throw new Error(`Pseudorandom is not initialized. Can't getRandom.`)
+    }
+
     return this.rnd()
   }
 
@@ -49,6 +57,6 @@ class Pseudorandom {
   }
 }
 
-export default Pseudorandom
+export default new Pseudorandom()
 
 /* eslint-ignore */

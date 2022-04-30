@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { ContextSettings } from "../data/contextSettings.data";
 import usePreRender from "../hooks/usePreRender";
 import { CommandHandler } from "../types/commandHandler";
-import AnimateShape from "./handlers/animateShape.handler";
-import AnimateText from "./handlers/animateText.handler";
-import FakeCode from "./handlers/fakeCode.handler";
-import ResetContext from "./handlers/resetContext.handler";
-import Use from "./handlers/use.handler";
-import UseShape from "./handlers/useShape.handler";
-import DrawShape from "./handlers/_drawShape.handler";
+import AnimateShapeHandler from "./handlers/animateShape.handler";
+import AnimateTextHandler from "./handlers/animateText.handler";
+import FakeCodeHandler from "./handlers/fakeCode.handler";
+import ResetContextHandler from "./handlers/resetContext.handler";
+import SleepHandler from "./handlers/sleep.handler";
+import UseHandler from "./handlers/use.handler";
+import UseShapeHandler from "./handlers/useShape.handler";
+import DrawShapeHandler from "./handlers/_drawShape.handler";
 import RenderText from "./renderText";
 
 export interface RenderCommandProps {
@@ -31,24 +32,24 @@ const lowercaseKeys = function<T>(obj: GenericObject<T>): GenericObject<T> {
 }
 
 const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercaseKeys({
-  'ANIMATE-SHAPE': AnimateShape,
-  'ANIMATE-TEXT': AnimateText,
+  'ANIMATE-SHAPE': AnimateShapeHandler,
+  'ANIMATE-TEXT': AnimateTextHandler,
   'CLEAR': null,
   'CLOSE': null,
-  '#DRAW-SHAPE': DrawShape, // Special internal command, not available to users 
-  'FAKE-CODE': FakeCode,
+  '#DRAW-SHAPE': DrawShapeHandler, // Special internal command, not available to users 
+  'FAKE-CODE': FakeCodeHandler,
   'GO-TO': null,
   'HERE-IS': null,
   'IF': null,
   'POPUP': null,
   'PROMPT': null,
   'PROGRESS': null,
-  'RESET-CONTEXT': ResetContext,
+  'RESET-CONTEXT': ResetContextHandler,
   'SET-COLOR': null,
   'SET': null,
-  'SLEEP': null,
-  'USE-SHAPE': UseShape,
-  'USE': Use,
+  'SLEEP': SleepHandler,
+  'USE-SHAPE': UseShapeHandler,
+  'USE': UseHandler,
   'TEXT': null
 })
 

@@ -4,6 +4,8 @@ import { TextAnimation } from "../types/text.animation"
 export class ContextSettings {
   constructor(settingsToCopy?: ContextSettings) {
     if (settingsToCopy) {
+      this.isTextContainer = settingsToCopy.isTextContainer
+
       this.textAnimation = settingsToCopy.textAnimation
       this.textTypeAnimationDelay = settingsToCopy.textTypeAnimationDelay
       this.textLineAnimationDelay = settingsToCopy.textLineAnimationDelay
@@ -16,6 +18,8 @@ export class ContextSettings {
       this.seed = settingsToCopy.seed
     }
   }
+
+  isTextContainer = true
 
   textAnimation = TextAnimation.TYPE
   textTypeAnimationDelay = 15

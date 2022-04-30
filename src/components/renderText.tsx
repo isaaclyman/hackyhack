@@ -5,6 +5,7 @@ export interface RenderTextProps {
   animation: TextAnimation
   delay: number
   done: () => void
+  style: React.CSSProperties
   text: string
 }
 
@@ -18,6 +19,7 @@ export default function RenderText(props: RenderTextProps) {
     if (el.current) {
       el.current.scrollIntoView()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.text])
 
   useEffect(() => {
@@ -31,10 +33,11 @@ export default function RenderText(props: RenderTextProps) {
     }, props.delay)
 
     return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typingIndex, props.text, props.delay, props.animation])
 
   return (
-    <div style={{whiteSpace: 'pre-wrap'}} ref={el}>
+    <div style={{whiteSpace: 'pre', ...props.style}} ref={el}>
       {props.animation === TextAnimation.TYPE ?
         props.text.slice(0, typingIndex) :
         props.text
@@ -46,5 +49,6 @@ export default function RenderText(props: RenderTextProps) {
 RenderText.defaultProps = {
   animation: TextAnimation.NONE,
   delay: 15,
-  done: () => {}
+  done: () => {},
+  style: {}
 }

@@ -1,5 +1,6 @@
 .shape {
   overflow: hidden;
+  padding: 6px;
   position: absolute;
 }
 
@@ -22,4 +23,13 @@
   border-radius: 50%;
   border-style: solid;
   border-width: 1px;
+}
+
+.animate-shape-fade {
+  opacity: 0;
+}
+
+.animate-shape-grow {
+  height: 0%;
+  width: 0%;
 }

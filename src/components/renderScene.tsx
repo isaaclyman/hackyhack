@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { ContextSettings } from '../data/contextSettings.data'
 import RenderCommand from './renderCommand'
 import contextEventHub, { TopContextName } from '../services/contextEventHub'
+import RenderSceneParent, { ContextGrouping } from './renderSceneParent'
 
 export interface RenderSceneProps {
   commands: kdljs.Node[]
@@ -11,19 +12,16 @@ export interface RenderSceneProps {
   settings?: ContextSettings
 }
 
-interface ContextGrouping {
-  commands: kdljs.Node[]
-  name: string
-  parentNode: kdljs.Node
-}
-
 const topLevelContextName = TopContextName
 
 export default function RenderScene(props: RenderSceneProps) {
   const topContextName = props.contextName || topLevelContextName
   const [contexts, setContexts] = useState([] as ContextGrouping[])
 
-  const [settings, setSettings] = useState(new ContextSettings(props.settings || undefined))
+  const [settings, setSettings] = useState(new ContextSettings(props.settings ? {
+    ...props.settings,
+    isTextContainer: true
+  } : undefined))
 
   const [remainingCommands, setRemainingCommands] = useState(props.commands)
   const [commandIndex, setCommandIndex] = useState(0)
@@ -44,6 +42,7 @@ export default function RenderScene(props: RenderSceneProps) {
 
     const newContexts = contexts.concat(context)
     setContexts(newContexts)
+
     console.log('Create context', context, newContexts)
   }
 
@@ -76,6 +75,7 @@ export default function RenderScene(props: RenderSceneProps) {
     }
 
     setRenderedCommands(renderedCommands.concat(next))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commandIndex, remainingCommands])
 
   return (
@@ -92,12 +92,11 @@ export default function RenderScene(props: RenderSceneProps) {
         />
       )}
       {contexts.map(context =>
-        <RenderCommand
+        <RenderSceneParent
           changeContext={changeContext}
-          command={context.parentNode}
-          createContext={createNewContext}
-          done={() => { }}
-          key={`${context.name}__parent`}
+          context={context}
+          createNewContext={createNewContext}
+          key={context.name}
           setSettings={setAndPropagateSettings}
           settings={settings}
         >
@@ -107,7 +106,7 @@ export default function RenderScene(props: RenderSceneProps) {
             setSettings={setAndPropagateSettings}
             settings={settings}
           />
-        </RenderCommand>
+        </RenderSceneParent>
       )}
     </>
   )
