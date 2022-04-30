@@ -1,11 +1,13 @@
 import { kdljs } from "kdljs"
 
 export type ContextSwitchHandler = (remainingCommands: kdljs.Node[]) => void
+export const TopContextName = '$__top'
 
 class ContextEventHub {
   private switchHandlers: {[contextName: string]: ContextSwitchHandler} = {}
 
   registerContextEventHandler(contextName: string, handler: ContextSwitchHandler): void {
+    console.log('registered context handler', contextName)
     if (this.switchHandlers[contextName]) {
       console.warn(`More than one event handler registered for context '${contextName}'.`)
     }
@@ -14,6 +16,7 @@ class ContextEventHub {
   }
 
   reset() {
+    console.warn('resetting ContextEventHub')
     this.switchHandlers = {}
   }
 

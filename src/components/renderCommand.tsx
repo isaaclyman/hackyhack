@@ -1,9 +1,11 @@
 import { kdljs } from "kdljs";
 import React, { useEffect, useState } from "react";
 import { ContextSettings } from "../data/contextSettings.data";
+import usePreRender from "../hooks/usePreRender";
 import { CommandHandler } from "../types/commandHandler";
 import AnimateShape from "./handlers/animateShape.handler";
 import AnimateText from "./handlers/animateText.handler";
+import ResetContext from "./handlers/resetContext.handler";
 import Use from "./handlers/use.handler";
 import UseShape from "./handlers/useShape.handler";
 import DrawShape from "./handlers/_drawShape.handler";
@@ -40,12 +42,12 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'POPUP': null,
   'PROMPT': null,
   'PROGRESS': null,
+  'RESET-CONTEXT': ResetContext,
   'SET-COLOR': null,
   'SET': null,
   'SLEEP': null,
   'USE-SHAPE': UseShape,
   'USE': Use,
-  'USE-NOTHING': null,
   'TEXT': null
 })
 
@@ -55,9 +57,9 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
 
   const [commandSettings] = useState(props.settings)
 
-  useEffect(() => {
+  usePreRender(() => {
     console.log(`RENDER COMMAND ${commandName}`)
-  }, [commandName])
+  })
 
   useEffect(() => {
     if (!rendered && !commandHandlers[commandName]) {
