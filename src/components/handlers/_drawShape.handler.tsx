@@ -1,5 +1,5 @@
 import './_drawShape.scss'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler";
 import { ShapeAnimation } from '../../types/shape.animation';
 
@@ -99,10 +99,20 @@ const DrawShape: CommandHandler = function (props: React.PropsWithChildren<Comma
     }, 10)
   }, [])
 
+  const el = useRef(null as HTMLDivElement | null)
+  useEffect(() => {
+    if (!el.current) {
+      return
+    }
+
+    el.current.scrollTo(0, el.current.scrollHeight)
+  })
+
   return (
     <div
       className={classes.filter(c => !!c).join(' ')}
       style={styles}
+      ref={el}
     >
       {props.children}
     </div>
