@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { TextAnimation } from '../types/text.animation'
 
 export interface RenderTextProps {
@@ -10,9 +10,14 @@ export interface RenderTextProps {
 
 export default function RenderText(props: RenderTextProps) {
   const [typingIndex, setTypingIndex] = useState(0);
+  const el = useRef(null as HTMLDivElement | null)
 
   useEffect(() => {
     setTypingIndex(0);
+    
+    if (el.current) {
+      el.current.scrollIntoView()
+    }
   }, [props.text])
 
   useEffect(() => {
@@ -29,7 +34,7 @@ export default function RenderText(props: RenderTextProps) {
   }, [typingIndex, props.text, props.delay, props.animation])
 
   return (
-    <div style={{whiteSpace: 'pre-wrap'}}>
+    <div style={{whiteSpace: 'pre-wrap'}} ref={el}>
       {props.animation === TextAnimation.TYPE ?
         props.text.slice(0, typingIndex) :
         props.text
