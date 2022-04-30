@@ -4,6 +4,7 @@ import { TextAnimation } from '../types/text.animation'
 export interface RenderTextProps {
   animation: TextAnimation
   delay: number
+  done: () => void
   text: string
 }
 
@@ -16,6 +17,7 @@ export default function RenderText(props: RenderTextProps) {
 
   useEffect(() => {
     if (typingIndex >= props.text.length || props.animation !== TextAnimation.TYPE) {
+      props.done()
       return
     }
 
@@ -27,7 +29,7 @@ export default function RenderText(props: RenderTextProps) {
   }, [typingIndex, props.text, props.delay, props.animation])
 
   return (
-    <div>
+    <div style={{whiteSpace: 'pre-wrap'}}>
       {props.animation === TextAnimation.TYPE ?
         props.text.slice(0, typingIndex) :
         props.text
@@ -39,5 +41,5 @@ export default function RenderText(props: RenderTextProps) {
 RenderText.defaultProps = {
   animation: TextAnimation.NONE,
   delay: 15,
-  text: ''
+  done: () => {}
 }

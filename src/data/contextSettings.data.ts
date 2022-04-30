@@ -13,6 +13,7 @@ export class ContextSettings {
       this.shapeAnimationQueueing = settingsToCopy.shapeAnimationQueueing
       
       this.color = settingsToCopy.color
+      this.seed = settingsToCopy.seed
     }
   }
 
@@ -25,4 +26,5 @@ export class ContextSettings {
   shapeAnimationQueueing = ShapeAnimationQueueing.QUEUE
 
   color = 'rgba(70, 150, 241, 1)'
+  seed = 'scriptname'
 }

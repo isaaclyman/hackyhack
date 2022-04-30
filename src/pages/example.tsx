@@ -6,6 +6,6 @@ console.log(2)
 
 export default function Example() {
   return (
-    <Navigate to="/hack" state={{script: ReadmeExample}} />
+    <Navigate to="/hack" state={{script: ReadmeExample, scriptName: 'ReadmeExample'}} />
   )
 }

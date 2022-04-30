@@ -5,6 +5,7 @@ import usePreRender from "../hooks/usePreRender";
 import { CommandHandler } from "../types/commandHandler";
 import AnimateShape from "./handlers/animateShape.handler";
 import AnimateText from "./handlers/animateText.handler";
+import FakeCode from "./handlers/fakeCode.handler";
 import ResetContext from "./handlers/resetContext.handler";
 import Use from "./handlers/use.handler";
 import UseShape from "./handlers/useShape.handler";
@@ -35,7 +36,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'CLEAR': null,
   'CLOSE': null,
   '#DRAW-SHAPE': DrawShape, // Special internal command, not available to users 
-  'FAKE-CODE': null,
+  'FAKE-CODE': FakeCode,
   'GO-TO': null,
   'HERE-IS': null,
   'IF': null,

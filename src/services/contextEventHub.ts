@@ -16,7 +16,6 @@ class ContextEventHub {
   }
 
   reset() {
-    console.warn('resetting ContextEventHub')
     this.switchHandlers = {}
   }
 
