@@ -8,6 +8,7 @@ import AnimateTextHandler from "./handlers/animateText.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
 import ResetContextHandler from "./handlers/resetContext.handler";
 import SleepHandler from "./handlers/sleep.handler";
+import TextHandler from "./handlers/text.handler";
 import UseHandler from "./handlers/use.handler";
 import UseShapeHandler from "./handlers/useShape.handler";
 import DrawShapeHandler from "./handlers/_drawShape.handler";
@@ -50,7 +51,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'SLEEP': SleepHandler,
   'USE-SHAPE': UseShapeHandler,
   'USE': UseHandler,
-  'TEXT': null
+  'TEXT': TextHandler
 })
 
 export default function RenderCommand(props: React.PropsWithChildren<RenderCommandProps>) {

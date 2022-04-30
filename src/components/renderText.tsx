@@ -23,7 +23,7 @@ export default function RenderText(props: RenderTextProps) {
   }, [props.text])
 
   useEffect(() => {
-    if (typingIndex >= props.text.length || props.animation !== TextAnimation.TYPE) {
+    if (typingIndex > props.text.length || props.animation !== TextAnimation.TYPE) {
       props.done()
       return
     }
@@ -39,7 +39,7 @@ export default function RenderText(props: RenderTextProps) {
   return (
     <div style={{whiteSpace: 'pre', ...props.style}} ref={el}>
       {props.animation === TextAnimation.TYPE ?
-        props.text.slice(0, typingIndex) :
+        (props.text.slice(0, typingIndex) || ' ') :
         props.text
       }
     </div>
