@@ -1,6 +1,10 @@
 $cyberblue: rgba(70, 150, 241, 1);
 $monofont: 'Inconsolata', source-code-pro, Consolas, monospace;;
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   background-color: #111;
   color: $cyberblue;
@@ -13,10 +17,12 @@ html, body {
 }
 
 html {
+  height: 100vh;
   padding: 12px;
 }
 
 body {
+  height: 100%;
   position: relative;
 }
 

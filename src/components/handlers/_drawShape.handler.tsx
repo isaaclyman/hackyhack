@@ -1,33 +1,34 @@
 import './_drawShape.scss'
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler";
 
 const DrawShape: CommandHandler = function(props: React.PropsWithChildren<CommandHandlerProps>) {
-  const classes = ['shape']
-  let styles: React.CSSProperties = {}
+  const [classes, setClasses] = useState(['shape'])
+  const [styles, setStyles] = useState({} as React.CSSProperties)
 
   useEffect(() => {
     const newStyles: React.CSSProperties = {
       borderColor: props.settings.color,
       color: props.settings.color
     }
+    const newClasses: string[] = []
     
     for (const child of props.command.children) {
       const childValue = child.values.filter(val => typeof val === 'number')[0] as number;
   
       switch (child.name.toLowerCase()) {
         case 'rectangle':
-          classes.push('shape-rectangle')
+          newClasses.push('shape-rectangle')
           continue
         case 'rectangle-rounded':
-          classes.push('shape-rectangle-rounded')
+          newClasses.push('shape-rectangle-rounded')
           continue
         case 'rectangle-blank':
         case 'blank':
-          classes.push('shape-rectangle-blank')
+          newClasses.push('shape-rectangle-blank')
           continue
         case 'oval':
-          classes.push('shape-oval')
+          newClasses.push('shape-oval')
           continue
         case 'name':
           // Names are consumed by the USE SHAPE command
@@ -53,7 +54,8 @@ const DrawShape: CommandHandler = function(props: React.PropsWithChildren<Comman
       }
     }
 
-    styles = newStyles
+    setClasses(classes.concat(newClasses))
+    setStyles(newStyles)
   }, [])
 
   return (

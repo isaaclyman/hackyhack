@@ -7,10 +7,14 @@ class ContextEventHub {
 
   registerContextEventHandler(contextName: string, handler: ContextSwitchHandler): void {
     if (this.switchHandlers[contextName]) {
-      throw new Error(`Context '${contextName}' should only have one event handler.`)
+      console.warn(`More than one event handler registered for context '${contextName}'.`)
     }
 
     this.switchHandlers[contextName] = handler
+  }
+
+  reset() {
+    this.switchHandlers = {}
   }
 
   switchContext(contextName: string, remainingCommands: kdljs.Node[]) {

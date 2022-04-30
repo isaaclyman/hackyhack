@@ -1,8 +1,9 @@
 import { parse } from 'kdljs'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import RenderScene from '../components/renderScene'
 import RenderText from '../components/renderText'
+import contextEventHub from '../services/contextEventHub'
 
 export interface RenderHackLocationState {
   script: string
@@ -12,6 +13,10 @@ export default function RenderHack() {
   const {state} = useLocation() as {state: RenderHackLocationState}
 
   const parsed = parse(state.script)
+
+  useEffect(() => {
+    contextEventHub.reset()
+  }, [])
 
   return parsed.errors && parsed.errors.length ?
     <>

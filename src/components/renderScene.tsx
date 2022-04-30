@@ -30,7 +30,7 @@ export default function RenderScene(props: RenderSceneProps) {
   const [renderedCommands, setRenderedCommands] = useState([] as kdljs.Node[])
 
   function changeContext(contextName: string): void {
-    contextEventHub.switchContext(contextName, remainingCommands.slice(commandIndex + 1))
+    contextEventHub.switchContext(contextName, remainingCommands)
   }
 
   function createNewContext(contextName: string, parentNode: kdljs.Node): void {
@@ -44,11 +44,15 @@ export default function RenderScene(props: RenderSceneProps) {
 
     const newContexts = contexts.concat(context)
     setContexts(newContexts)
+    console.log('Create context', context, newContexts)
   }
 
   function processNext() {
     const next = remainingCommands[commandIndex]
 
+    if (!next) {
+      return
+    }
 
     setRenderedCommands(renderedCommands.concat(next))
     setCommandIndex(commandIndex + 1)
@@ -61,12 +65,14 @@ export default function RenderScene(props: RenderSceneProps) {
 
   useEffect(() => {
     contextEventHub.registerContextEventHandler(topContextName, remainingCommands => {
+      console.log('received context')
       setRemainingCommands(remainingCommands)
       setCommandIndex(0)
       processNext()
     })
 
-    processNext()
+    contextEventHub.switchContext(topContextName, remainingCommands)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -82,7 +88,8 @@ export default function RenderScene(props: RenderSceneProps) {
           settings={settings}
         />
       )}
-      {contexts.map(context => {
+      {contexts.map(context => 
+        console.log('rendering a context', context.name) as any ||
         <RenderCommand
           changeContext={changeContext}
           command={context.parentNode}
@@ -99,7 +106,7 @@ export default function RenderScene(props: RenderSceneProps) {
             settings={settings}
           />
         </RenderCommand>
-      })}
+      )}
     </>
   )
 }

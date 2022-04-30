@@ -4,6 +4,7 @@ import { ContextSettings } from "../data/contextSettings.data";
 import { CommandHandler } from "../types/commandHandler";
 import AnimateShape from "./handlers/animateShape.handler";
 import AnimateText from "./handlers/animateText.handler";
+import Use from "./handlers/use.handler";
 import UseShape from "./handlers/useShape.handler";
 import DrawShape from "./handlers/_drawShape.handler";
 import RenderText from "./renderText";
@@ -43,7 +44,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'SET': null,
   'SLEEP': null,
   'USE-SHAPE': UseShape,
-  'USE': null,
+  'USE': Use,
   'USE-NOTHING': null,
   'TEXT': null
 })
@@ -55,11 +56,16 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
   const [commandSettings] = useState(props.settings)
 
   useEffect(() => {
+    console.log(`RENDER COMMAND ${commandName}`)
+  }, [commandName])
+
+  useEffect(() => {
     if (!rendered && !commandHandlers[commandName]) {
       props.done()
     }
     
     setRendered(true)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rendered, commandName, props.done])
 
   if (!commandHandlers[commandName]) {
