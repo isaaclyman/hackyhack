@@ -21,7 +21,7 @@ class FakeCodeManager {
     }
 
     this.fakeCodeIndex++
-    return fakeCodes[this.fakeCodeIndex % fakeCodes.length]
+    return fakeCodes[this.fakeCodeIndex % fakeCodes.length].trim()
   }
 }
 

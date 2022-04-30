@@ -5,7 +5,7 @@ import { useState } from "react";
 import usePreRender from "../../hooks/usePreRender";
 import FakeCodeManager from "../../data/fake-code.manager";
 
-const FakeCode: CommandHandler = function (props: CommandHandlerProps) {
+const FakeCodeHandler: CommandHandler = function (props: CommandHandlerProps) {
   const [lines, setLines] = useState([] as string[])
 
   usePreRender(() => {
@@ -44,4 +44,4 @@ const FakeCode: CommandHandler = function (props: CommandHandlerProps) {
 
 }
 
-export default FakeCode
+export default FakeCodeHandler

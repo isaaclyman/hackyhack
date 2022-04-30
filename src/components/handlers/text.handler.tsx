@@ -4,7 +4,7 @@ import QueueGroup from "../queueGroup";
 import { useState } from "react";
 import usePreRender from "../../hooks/usePreRender";
 
-const Text: CommandHandler = function (props: CommandHandlerProps) {
+const TextHandler: CommandHandler = function (props: CommandHandlerProps) {
   const [lines, setLines] = useState([] as string[])
   const [hasCalledDone, setHasCalledDone] = useState(false)
 
@@ -37,4 +37,4 @@ const Text: CommandHandler = function (props: CommandHandlerProps) {
   </QueueGroup>
 }
 
-export default Text
+export default TextHandler

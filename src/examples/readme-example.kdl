@@ -12,7 +12,7 @@ USE-SHAPE {
     NAME "left"
     TOP 0
     LEFT 0
-    WIDTH 48
+    WIDTH 49
     HEIGHT 100
 }
 
@@ -21,8 +21,8 @@ USE-SHAPE {
     RECTANGLE-ROUNDED
     NAME "right"
     TOP 0
-    LEFT 52
-    WIDTH 48
+    LEFT 51
+    WIDTH 49
     HEIGHT 100
 }
 

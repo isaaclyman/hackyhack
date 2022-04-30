@@ -56,7 +56,7 @@ USE-SHAPE {
     NAME "left"
     TOP 0
     LEFT 0
-    WIDTH 50
+    WIDTH 49
     HEIGHT 100
 }
 
@@ -65,8 +65,8 @@ USE-SHAPE {
     RECTANGLE-ROUNDED
     NAME "right"
     TOP 0
-    LEFT 50
-    WIDTH 50
+    LEFT 51
+    WIDTH 49
     HEIGHT 100
 }
 
@@ -169,6 +169,7 @@ SLEEP 1000
 TEXT "2..."
 SLEEP 1000
 TEXT "1..."
+SLEEP 1000
 TEXT "Disconnected."
 ```
 

@@ -3,7 +3,7 @@ import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler"
 import RenderText from "../renderText";
 import { TextAnimation } from "../../types/text.animation";
 
-const Sleep: CommandHandler = function (props: CommandHandlerProps) {
+const SleepHandler: CommandHandler = function (props: CommandHandlerProps) {
   const timeout = props.command.values.filter(val => typeof val === 'number')[0] as number
   const [isBlinkOn, setIsBlinkOn] = useState(true)
   const [isDone, setIsDone] = useState(false)
@@ -39,4 +39,4 @@ const Sleep: CommandHandler = function (props: CommandHandlerProps) {
   />
 }
 
-export default Sleep
+export default SleepHandler

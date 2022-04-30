@@ -2,7 +2,7 @@ import raw from 'raw.macro'
 import { Navigate } from 'react-router-dom'
 
 const ReadmeExample = raw('../examples/readme-example.kdl')
-console.log(3)
+console.log(4)
 
 export default function Example() {
   return (

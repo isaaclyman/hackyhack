@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler";
 
-const Use: CommandHandler = function(props: CommandHandlerProps) {
+const UseHandler: CommandHandler = function(props: CommandHandlerProps) {
   useEffect(() => {
     const contextName = props.command.values[0] as string
     props.changeContext(contextName)
@@ -11,4 +11,4 @@ const Use: CommandHandler = function(props: CommandHandlerProps) {
   return null
 }
 
-export default Use
+export default UseHandler

@@ -15,7 +15,7 @@ function getAnimationDelay(commandValues: kdljs.Value[]): number {
   return numericValues[0] as number
 }
 
-const AnimateShape: CommandHandler = function(props) {
+const AnimateShapeHandler: CommandHandler = function(props) {
   useEffect(() => {
     const newSettings = new ContextSettings(props.settings)
   
@@ -49,4 +49,4 @@ const AnimateShape: CommandHandler = function(props) {
   return null
 }
 
-export default AnimateShape
+export default AnimateShapeHandler

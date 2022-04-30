@@ -17,7 +17,7 @@ function getAnimationDelay(commandValues: kdljs.Value[], defaultValue: number): 
   return numericValues[0] as number
 }
 
-const AnimateText: CommandHandler = function(props) {
+const AnimateTextHandler: CommandHandler = function(props) {
   useEffect(() => {
     const newSettings = new ContextSettings(props.settings)
   
@@ -50,4 +50,4 @@ const AnimateText: CommandHandler = function(props) {
   return null
 }
 
-export default AnimateText
+export default AnimateTextHandler

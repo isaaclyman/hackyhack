@@ -3,7 +3,7 @@ import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler"
 
 let counter = 0
 
-const UseShape: CommandHandler = function(props: CommandHandlerProps) {
+const UseShapeHandler: CommandHandler = function(props: CommandHandlerProps) {
   useEffect(() => {
     const nameNode = props.command.children.find(child => child.name.toLowerCase() === 'name')
     const name = nameNode ? nameNode.values[0] as string : `$__unnamed_shape_${counter++}`
@@ -17,4 +17,4 @@ const UseShape: CommandHandler = function(props: CommandHandlerProps) {
   return null
 }
 
-export default UseShape
+export default UseShapeHandler

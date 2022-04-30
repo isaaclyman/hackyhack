@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler";
 import { ShapeAnimation } from '../../types/shape.animation';
 
-const DrawShape: CommandHandler = function (props: React.PropsWithChildren<CommandHandlerProps>) {
+const DrawShapeHandler: CommandHandler = function (props: React.PropsWithChildren<CommandHandlerProps>) {
   const baseStyles: React.CSSProperties = {
     borderColor: props.settings.color,
     color: props.settings.color
@@ -109,4 +109,4 @@ const DrawShape: CommandHandler = function (props: React.PropsWithChildren<Comma
   )
 }
 
-export default DrawShape
+export default DrawShapeHandler
