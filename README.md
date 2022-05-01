@@ -292,6 +292,7 @@ POPUP {
 
 Shows a popup box (like a dialog or modal). If you use the `POPUP` command without options, it will show a popup with a warning icon and an X button in the corner to close it.
 
+- `NAME` sets the name of the prompt. You can use this name with the `CLOSE-POPUP` command to close the popup at any time.
 - `LAYER` sets the stacking layer of the popup. The default is 9000, because usually prompts are shown above everything else on the screen.
 - `TITLE` sets the title of the popup. If no title is provided, the title bar won't be shown.
 - `MESSAGE` sets the message in the popup.
