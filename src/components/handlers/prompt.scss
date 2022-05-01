@@ -1,0 +1,10 @@
+.prompt-handler {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.prompt-handler-input {
+  flex: 1;
+  margin-left: 0.7em;
+}

@@ -51,8 +51,6 @@ const DrawShapeHandler: CommandHandler = function (props: React.PropsWithChildre
     }
   }
 
-  console.log(baseStyles)
-
   const [classes, setClasses] = useState(['shape', ...baseClasses])
   const [styles, setStyles] = useState(baseStyles)
 

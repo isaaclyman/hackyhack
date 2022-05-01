@@ -1,5 +1,10 @@
-$cyberblue: rgba(70, 150, 241, 1);
-$monofont: 'Inconsolata', source-code-pro, Consolas, monospace;;
+@function cyberblueTransparent($opacity) {
+  @return rgba(70, 150, 241, $opacity)
+}
+
+$cyberblue: cyberblueTransparent(1);
+$monofont: 'Inconsolata', source-code-pro, Consolas, monospace;
+
 
 * {
   box-sizing: border-box;
@@ -43,4 +48,16 @@ a, button {
 
 a {
   padding-right: 12px;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  
+  &:focus {
+    outline-color: cyberblueTransparent(0.2);
+    outline-style: solid;
+    outline-width: 2px;
+  }
 }
