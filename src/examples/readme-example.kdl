@@ -63,7 +63,7 @@ IF "$avoidDetection" EQUALS="yes" {
         TOP 0
         WIDTH 100
         HEIGHT 100
-        TRANSPARENT 40
+        TRANSPARENT 10
     }
 
     ANIMATE-TEXT {
