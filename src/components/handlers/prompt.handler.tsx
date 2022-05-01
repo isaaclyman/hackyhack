@@ -21,11 +21,15 @@ const PromptHandler: CommandHandler = function(props: CommandHandlerProps) {
   }
 
   function refocusInput() {
+    if (isDone) {
+      return
+    }
+
     setTimeout(() => {
-      if (isDone || !inputEl.current) {
+      if (!inputEl.current) {
         return
       }
-  
+
       inputEl.current.focus()
     }, 50)
   }
@@ -34,6 +38,8 @@ const PromptHandler: CommandHandler = function(props: CommandHandlerProps) {
     if ($event.key === 'Enter') {
       setIsDone(true)
       props.done()
+      window.removeEventListener('keyup', refocusInput)
+      window.removeEventListener('click', refocusInput)
     }
   }
 
@@ -44,6 +50,16 @@ const PromptHandler: CommandHandler = function(props: CommandHandlerProps) {
 
     inputEl.current.focus()
   }, [inputEl.current, isPromptRendered])
+
+  useEffect(() => {
+    window.addEventListener('keyup', refocusInput)
+    window.addEventListener('click', refocusInput)
+
+    return () => {
+      window.removeEventListener('keyup', refocusInput)
+      window.removeEventListener('click', refocusInput)
+    }
+  }, [])
   
   return (
     <div className="prompt-handler">
