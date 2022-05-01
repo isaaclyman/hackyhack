@@ -48,7 +48,6 @@ ANIMATE-TEXT {
 
 ANIMATE-SHAPE {
     GROW
-    SIMULTANEOUS
 }
 
 USE-SHAPE {
@@ -180,7 +179,6 @@ TEXT "Disconnected."
 ```kdl
 ANIMATE-SHAPE {
     GROW 250
-    QUEUE
 }
 ```
 
@@ -191,11 +189,6 @@ Available `SHAPE` animations:
 - `"NONE"`: all shapes appear instantly.
 - `"FADE 250"`: shapes fade in, taking 250 milliseconds by default.
 - `"GROW 250"`: shapes grow from their top left corner to full size, taking 250 milliseconds by default.
-
-You can also choose `QUEUE` or `SIMULTANEOUS` for any animation:
-
-- `QUEUE`: shapes appear one at a time in the order they're listed in the script.
-- `SIMULTANEOUS`: shapes appear at the same time.
 
 ### ANIMATE-TEXT
 
@@ -211,8 +204,8 @@ Available `TEXT` animations:
 
 - `"NONE"`: all text appears instantly.
 - `"LINE 100"`: text appears one line at a time with a default 100 millisecond delay between lines.
-- `"TYPE 15"`: text appears one character at a time, as though someone were typing it, with a default 15 millisecond delay between characters. When one line is finished typing, the next line will begin.
-- `"LINE-TYPE 100 15"`: a combination of `LINE` and `TYPE`. In this case each character will take 15 milliseconds to type and each line will begin typing 100 milliseconds apart, even if the previous line isn't finished. This allows multiple lines to type out at the same time.
+- `"TYPE 10"`: text appears one character at a time, as though someone were typing it, with a default 10 millisecond delay between characters. When one line is finished typing, the next line will begin.
+- `"LINE-TYPE 100 10"`: a combination of `LINE` and `TYPE`. In this case each character will take 10 milliseconds to type and each line will begin typing 100 milliseconds apart, even if the previous line isn't finished. This allows multiple lines to type out at the same time.
 
 ### CLEAR
 

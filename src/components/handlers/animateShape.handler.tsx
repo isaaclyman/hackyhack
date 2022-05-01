@@ -2,7 +2,7 @@ import { kdljs } from "kdljs"
 import { useEffect } from "react"
 import { ContextSettings } from "../../data/contextSettings.data"
 import { CommandHandler } from "../../types/commandHandler"
-import { ShapeAnimation, ShapeAnimationQueueing } from "../../types/shape.animation"
+import { ShapeAnimation } from "../../types/shape.animation"
 
 const defaultAnimationDelay = new ContextSettings().shapeAnimationDelay
 
@@ -31,12 +31,6 @@ const AnimateShapeHandler: CommandHandler = function(props) {
         case 'fade':
           newSettings.shapeAnimation = ShapeAnimation.FADE
           newSettings.shapeAnimationDelay = getAnimationDelay(child.values)
-          continue
-        case 'queue':
-          newSettings.shapeAnimationQueueing = ShapeAnimationQueueing.QUEUE
-          continue
-        case 'simultaneous':
-          newSettings.shapeAnimationQueueing = ShapeAnimationQueueing.SIMULTANEOUS
           continue
       }
     }

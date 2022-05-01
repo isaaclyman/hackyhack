@@ -1,4 +1,4 @@
-import { ShapeAnimation, ShapeAnimationQueueing } from "../types/shape.animation"
+import { ShapeAnimation } from "../types/shape.animation"
 import { TextAnimation } from "../types/text.animation"
 
 export class ContextSettings {
@@ -12,7 +12,6 @@ export class ContextSettings {
   
       this.shapeAnimation = settingsToCopy.shapeAnimation
       this.shapeAnimationDelay = settingsToCopy.shapeAnimationDelay
-      this.shapeAnimationQueueing = settingsToCopy.shapeAnimationQueueing
       
       this.color = settingsToCopy.color
       this.seed = settingsToCopy.seed
@@ -22,12 +21,11 @@ export class ContextSettings {
   isTextContainer = true
 
   textAnimation = TextAnimation.TYPE
-  textTypeAnimationDelay = 15
+  textTypeAnimationDelay = 10
   textLineAnimationDelay: number | null = null
 
   shapeAnimation = ShapeAnimation.NONE
   shapeAnimationDelay = 250
-  shapeAnimationQueueing = ShapeAnimationQueueing.QUEUE
 
   color = 'rgba(70, 150, 241, 1)'
   seed = 'scriptname'

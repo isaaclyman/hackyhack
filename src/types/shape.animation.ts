@@ -3,8 +3,3 @@ export enum ShapeAnimation {
   GROW = "grow",
   FADE = "fade"
 }
-
-export enum ShapeAnimationQueueing {
-  QUEUE = "queue",
-  SIMULTANEOUS = "simultaneous"
-}
