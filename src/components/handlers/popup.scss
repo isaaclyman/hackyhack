@@ -1,0 +1,95 @@
+.popup-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: row;
+  inset: 50%;
+  overflow: hidden;
+  position: fixed;
+  transition: inset 250ms ease;
+
+  &.h-center {
+    justify-content: center;
+  }
+  &.h-left {
+    justify-content: flex-start;
+  }
+  &.h-right {
+    justify-content: flex-end;
+  }
+
+  &.v-center {
+    align-items: center;
+  }
+  &.v-top {
+    align-items: flex-start;
+  }
+  &.v-bottom {
+    align-items: flex-end;
+  }
+
+  &.popup-overlay-afteropen {
+    inset: 0;
+  }
+
+  &.popup-overlay-beforeclose {
+    inset: 50%;
+  }
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: flex-start;
+  max-height: 0;
+  max-width: 0;
+  overflow-y: auto;
+  padding: 20px;
+  transition: max-height 500ms, max-width 500ms;
+  width: 700px;
+
+  &.popup-afteropen {
+    max-height: 95%;
+    max-width: 95%;
+  }
+
+  &.popup-beforeclose {
+    max-height: 0;
+    max-width: 0;
+  }
+}
+
+.popup-title {
+  height: 60px;
+  width: 100%;
+}
+
+.popup-body {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.popup-message {
+
+}
+
+.popup-actions {
+  button:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+.ReactModal__Overlay {
+  inset: 50% !important;
+}
+
+.ReactModal__Overlay--after-open{
+  inset: 0 !important
+}
+
+.ReactModal__Overlay--before-close{
+  inset: 50% !important;
+}

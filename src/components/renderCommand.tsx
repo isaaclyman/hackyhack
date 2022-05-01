@@ -8,6 +8,7 @@ import AnimateShapeHandler from "./handlers/animateShape.handler";
 import AnimateTextHandler from "./handlers/animateText.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
 import IfHandler from "./handlers/if.handler";
+import PopupHandler from "./handlers/popup.handler";
 import PromptHandler from "./handlers/prompt.handler";
 import ResetContextHandler from "./handlers/resetContext.handler";
 import SleepHandler from "./handlers/sleep.handler";
@@ -50,7 +51,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'GO-TO': null,
   'HERE-IS': null,
   'IF': IfHandler,
-  'POPUP': null,
+  'POPUP': PopupHandler,
   'PROMPT': PromptHandler,
   'PROGRESS': null,
   'RESET-CONTEXT': ResetContextHandler,
