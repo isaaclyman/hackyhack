@@ -6,6 +6,7 @@ import { CommandHandler } from "../types/commandHandler";
 import { ErrorBoundary } from "./errorBoundary";
 import AnimateShapeHandler from "./handlers/animateShape.handler";
 import AnimateTextHandler from "./handlers/animateText.handler";
+import CloseShapeHandler from "./handlers/closeShape.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
 import IfHandler from "./handlers/if.handler";
 import PopupHandler from "./handlers/popup.handler";
@@ -46,7 +47,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'CLOSE-ALL-POPUPS': null,
   'CLOSE-ALL-SHAPES': null,
   'CLOSE-POPUP': null,
-  'CLOSE-SHAPE': null,
+  'CLOSE-SHAPE': CloseShapeHandler,
   '#DRAW-SHAPE': DrawShapeHandler, // Special internal command, not available to users 
   'FAKE-CODE': FakeCodeHandler,
   'GO-TO': null,

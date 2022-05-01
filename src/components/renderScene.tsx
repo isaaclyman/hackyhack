@@ -2,7 +2,7 @@ import { kdljs } from 'kdljs'
 import { useEffect, useState } from 'react'
 import { ContextSettings } from '../data/contextSettings.data'
 import RenderCommand from './renderCommand'
-import contextEventHub, { TopContextName } from '../services/contextEventHub'
+import ContextEventHub, { TopContextName } from '../services/contextEventHub'
 import RenderSceneParent, { ContextGrouping } from './renderSceneParent'
 
 export interface RenderSceneProps {
@@ -15,7 +15,7 @@ export interface RenderSceneProps {
 const topLevelContextName = TopContextName
 
 export default function RenderScene(props: RenderSceneProps) {
-  const topContextName = props.contextName || topLevelContextName
+  const selfContextName = props.contextName || topLevelContextName
   const [contexts, setContexts] = useState([] as ContextGrouping[])
 
   const [settings, setSettings] = useState(new ContextSettings(props.settings ? {
@@ -28,28 +28,45 @@ export default function RenderScene(props: RenderSceneProps) {
   const [renderedCommands, setRenderedCommands] = useState([] as kdljs.Node[])
 
   function changeContext(contextName: string): void {
-    contextEventHub.switchContext(contextName, remainingCommands.slice(commandIndex + 1))
+    ContextEventHub.switchContext(contextName, remainingCommands.slice(commandIndex + 1))
   }
 
   function createNewContext(contextName: string, parentNode: kdljs.Node): void {
-    contextEventHub.validateNewContext(contextName)
+    ContextEventHub.validateNewContext(contextName)
 
-    const context: ContextGrouping = {
-      commands: remainingCommands.slice(commandIndex + 1),
-      name: contextName,
-      parentNode
-    }
+    setContexts(contexts => {
+      const context: ContextGrouping = {
+        commands: remainingCommands.slice(commandIndex + 1),
+        name: contextName,
+        parentNode
+      }
+  
+      const newContexts = contexts.concat(context)
+      return newContexts
+    })
 
-    const newContexts = contexts.concat(context)
-    setContexts(newContexts)
+    ContextEventHub.registerContextCloseHandler(contextName, () => {
+      setContexts(contexts => {
+        const newContexts = contexts.slice()
+        const indexToRemove = newContexts.findIndex(cx => cx.name === contextName)
+        if (indexToRemove < 0) {
+          return contexts
+        }
+        console.log('Removing context', contextName)
+        newContexts.splice(indexToRemove, 1)
+        return newContexts
+      })
+    })
 
-    console.log('Create context', context, newContexts)
+    console.log('Create context', contextName)
   }
 
   function insertCommands(commands: kdljs.Node[]) {
-    const newRemainingCommands = remainingCommands.slice()
-    newRemainingCommands.splice(commandIndex + 1, 0, ...commands)
-    setRemainingCommands(newRemainingCommands)
+    setRemainingCommands(remainingCommands => {
+      const newRemainingCommands = remainingCommands.slice()
+      newRemainingCommands.splice(commandIndex + 1, 0, ...commands)
+      return newRemainingCommands
+    })
   }
 
   function processNext() {
@@ -62,15 +79,27 @@ export default function RenderScene(props: RenderSceneProps) {
   }
 
   useEffect(() => {
-    console.log(topContextName, 'has commands', remainingCommands)
+    console.log(selfContextName, 'has commands', remainingCommands)
 
-    contextEventHub.registerContextEventHandler(topContextName, remainingCommands => {
-      console.log(topContextName, 'received context')
+    ContextEventHub.registerContextSwitchHandler(selfContextName, remainingCommands => {
+      console.log(selfContextName, 'received context')
       setRemainingCommands(remainingCommands)
       setCommandIndex(0)
     })
 
-    contextEventHub.switchContext(topContextName, remainingCommands)
+    ContextEventHub.registerContextRevertHandler(selfContextName, () => {
+      console.log(selfContextName, 'received context automatically because current context was closed')
+      processNext()
+    })
+
+    if (selfContextName === topLevelContextName) {
+      ContextEventHub.registerContextCloseHandler(topLevelContextName, () => {
+        setRenderedCommands([])
+        setContexts([])
+      })
+    }
+
+    ContextEventHub.switchContext(selfContextName, remainingCommands)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

@@ -128,6 +128,7 @@ IF "$avoidDetection" EQUALS="yes" {
     SLEEP 200
     TEXT "Detection eluded! 45 seconds until next network scan."
     SLEEP 1000
+    USE "left"
     CLOSE-SHAPE "detection avoidance"
 }
 
@@ -229,6 +230,8 @@ Closes a layer, shape, or popup.
 - `CLOSE-ALL-SHAPES` closes all shapes.
 - `CLOSE-POPUP` closes a popup by name, e.g. `CLOSE-POPUP "my cool prompt"`.
 - `CLOSE-ALL-POPUPS` closes all popups.
+
+**Use caution** when closing the shape you're currently in! You'll automatically revert to the previous context. It may be better to `USE` a different context _before_ closing the current shape so you can make sure the following commands happen where they're supposed to.
 
 ### FAKE-CODE
 

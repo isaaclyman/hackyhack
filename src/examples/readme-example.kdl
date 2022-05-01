@@ -84,6 +84,7 @@ IF "$avoidDetection" EQUALS="yes" {
     SLEEP 200
     TEXT "Detection eluded! 45 seconds until next network scan."
     SLEEP 1000
+    USE "left"
     CLOSE-SHAPE "detection avoidance"
 }
 
