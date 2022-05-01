@@ -11,6 +11,7 @@ import IfHandler from "./handlers/if.handler";
 import PopupHandler from "./handlers/popup.handler";
 import PromptHandler from "./handlers/prompt.handler";
 import ResetContextHandler from "./handlers/resetContext.handler";
+import SetHandler from "./handlers/set.handler";
 import SleepHandler from "./handlers/sleep.handler";
 import TextHandler from "./handlers/text.handler";
 import UseHandler from "./handlers/use.handler";
@@ -56,7 +57,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'PROGRESS': null,
   'RESET-CONTEXT': ResetContextHandler,
   'SET-COLOR': null,
-  'SET': null,
+  'SET': SetHandler,
   'SLEEP': SleepHandler,
   'USE-SHAPE': UseShapeHandler,
   'USE': UseHandler,

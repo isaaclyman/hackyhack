@@ -1,10 +1,10 @@
 import VariableManager from "../../data/variable.manager";
 import { CommandHandler, CommandHandlerProps } from "../../types/commandHandler";
 import { kdljs, format } from "kdljs";
-import usePreRender from "../../hooks/usePreRender";
+import { useEffect } from "react";
 
 const IfHandler: CommandHandler = function(props: CommandHandlerProps) {
-  usePreRender(() => {
+  useEffect(() => {
     const stringValues = props.command.values.filter(val => typeof val === 'string') as string[]
     const initialValue = stringValues[0]
     const simpleOperator = stringValues.length > 1 ?
@@ -72,7 +72,7 @@ const IfHandler: CommandHandler = function(props: CommandHandlerProps) {
 
     props.insertCommands(props.command.children)
     props.done()
-  })
+  }, [])
 
   return null
 }

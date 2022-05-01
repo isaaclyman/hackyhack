@@ -83,7 +83,8 @@ IF "$avoidDetection" EQUALS="yes" {
     TEXT "Trojan horse planted."
     SLEEP 200
     TEXT "Detection eluded! 45 seconds until next network scan."
-    SLEEP 500
+    SLEEP 1000
+    CLOSE-SHAPE "detection avoidance"
 }
 
 USE "left"

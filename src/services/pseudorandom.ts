@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/47593316/4347245
-/* eslint-ignore */
+/* eslint-disable */
 
 // MurmurHash3's mixing function
 // @ts-ignore
@@ -59,4 +59,4 @@ class Pseudorandom {
 
 export default new Pseudorandom()
 
-/* eslint-ignore */
+/* eslint-enable */
