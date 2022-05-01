@@ -7,6 +7,7 @@ import { ErrorBoundary } from "./errorBoundary";
 import AnimateShapeHandler from "./handlers/animateShape.handler";
 import AnimateTextHandler from "./handlers/animateText.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
+import IfHandler from "./handlers/if.handler";
 import PromptHandler from "./handlers/prompt.handler";
 import ResetContextHandler from "./handlers/resetContext.handler";
 import SleepHandler from "./handlers/sleep.handler";
@@ -21,6 +22,7 @@ export interface RenderCommandProps {
   command: kdljs.Node
   createContext: (contextName: string, parentNode: kdljs.Node) => void
   done: () => any
+  insertCommands: (commands: kdljs.Node[]) => void
   setSettings: (settings: ContextSettings) => void
   settings: ContextSettings
 }
@@ -47,7 +49,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'FAKE-CODE': FakeCodeHandler,
   'GO-TO': null,
   'HERE-IS': null,
-  'IF': null,
+  'IF': IfHandler,
   'POPUP': null,
   'PROMPT': PromptHandler,
   'PROGRESS': null,
@@ -96,7 +98,7 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
   return (
     <ErrorBoundary
       errorNode={error =>
-        <RenderText text={`Error in ${props.command} command: ${error.message}`} />
+        <RenderText text={`Error in ${props.command.name} command: ${error.message}`} />
       }
     >
       {
@@ -107,6 +109,7 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
             command: props.command,
             createContext: props.createContext,
             done: sendDone,
+            insertCommands: props.insertCommands,
             settings: commandSettings,
             setSettings: props.setSettings,
           },

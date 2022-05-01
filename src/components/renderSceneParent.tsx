@@ -13,6 +13,7 @@ export interface RenderSceneParentProps {
   changeContext: (contextName: string) => void
   context: ContextGrouping
   createNewContext: (contextName: string, parentNode: kdljs.Node) => void
+  insertCommands: (commands: kdljs.Node[]) => void
   setSettings: (settings: ContextSettings) => void
   settings: ContextSettings
 }
@@ -25,6 +26,7 @@ export default function RenderSceneParent(props: React.PropsWithChildren<RenderS
     command={props.context.parentNode}
     createContext={props.createNewContext}
     done={() => setIsDone(true)}
+    insertCommands={props.insertCommands}
     key={`${props.context.name}__parent`}
     setSettings={props.setSettings}
     settings={props.settings}

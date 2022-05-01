@@ -6,6 +6,7 @@ export interface CommandHandlerProps {
   command: kdljs.Node
   createContext: (contextName: string, parentNode: kdljs.Node) => void
   done: () => any
+  insertCommands: (commands: kdljs.Node[]) => void
   setSettings: (settings: ContextSettings) => void
   settings: ContextSettings
 }

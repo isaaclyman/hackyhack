@@ -46,6 +46,12 @@ export default function RenderScene(props: RenderSceneProps) {
     console.log('Create context', context, newContexts)
   }
 
+  function insertCommands(commands: kdljs.Node[]) {
+    const newRemainingCommands = remainingCommands.slice()
+    newRemainingCommands.splice(commandIndex + 1, 0, ...commands)
+    setRemainingCommands(newRemainingCommands)
+  }
+
   function processNext() {
     setCommandIndex(commandIndex + 1)
   }
@@ -86,6 +92,7 @@ export default function RenderScene(props: RenderSceneProps) {
           command={command}
           createContext={createNewContext}
           done={processNext}
+          insertCommands={insertCommands}
           key={index}
           setSettings={setAndPropagateSettings}
           settings={settings}
@@ -96,6 +103,7 @@ export default function RenderScene(props: RenderSceneProps) {
           changeContext={changeContext}
           context={context}
           createNewContext={createNewContext}
+          insertCommands={insertCommands}
           key={context.name}
           setSettings={setAndPropagateSettings}
           settings={settings}

@@ -263,12 +263,14 @@ IF "$someVariable" CONTAINS="text" {
 
 Lets you set a condition for a set of commands. Each operator needs a quoted value before it, and the first four also need an equals sign and quoted value afterward:
 
-- `EQUALS=`
-- `NOT-EQUALS=`
-- `CONTAINS=`
-- `NOT-CONTAINS=`
-- `"EMPTY"`
-- `"NOT-EMPTY"`
+- `EQUALS=` is true if the first value equals the second value.
+- `NOT-EQUALS=` is true if the first value does not equal the second value. 
+- `CONTAINS=` is true if the first value contains the second value. For example, `"hamster" CONTAINS="ham"` is true.
+- `NOT-CONTAINS=` is true if the first value does not contain the second value. `"ham" CONTAINS="hamster"` is false.
+- `"EMPTY"` is true if the first value is empty or only has spaces.
+- `"NOT-EMPTY"` is true if the first value is not empty--if it has anything in it besides spaces.
+
+**For all values being compared,**  beginning and ending spaces are ignored. The comparison is **not** case-sensitive. In other words, `"  REspONSE "` will be considered equal to `"response"` and `"  "` will be considered equal to `""`.
 
 ### POPUP
 
