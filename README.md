@@ -218,16 +218,15 @@ Deletes all content from the current context.
 ### CLOSE
 
 ```kdl
-CLOSE-LAYER 0
+CLOSE-SHAPE "left"
 ```
 
 Closes a layer, shape, or popup.
 
-- `CLOSE-ALL` closes every layer, shape, and popup in the entire scene.
-- `CLOSE-LAYER` closes an entire layer (including any shapes or popups it has) using its number.
-- `CLOSE-SHAPE` closes a shape by name, e.g. `CLOSE SHAPE "top left quadrant"`.
+- `CLOSE-ALL` closes every shape and popup in the entire hack.
+- `CLOSE-SHAPE` closes a shape by name, e.g. `CLOSE-SHAPE "top left quadrant"`.
 - `CLOSE-ALL-SHAPES` closes all shapes.
-- `CLOSE-POPUP` closes a popup by name, e.g. `CLOSE POPUP "my cool prompt"`.
+- `CLOSE-POPUP` closes a popup by name, e.g. `CLOSE-POPUP "my cool prompt"`.
 - `CLOSE-ALL-POPUPS` closes all popups.
 
 ### FAKE-CODE
@@ -262,7 +261,7 @@ IF "$someVariable" CONTAINS="text" {
 }
 ```
 
-Lets you set a condition for a set of commands. Each operator needs a quoted value before it, and the first four also need a quoted value afterward:
+Lets you set a condition for a set of commands. Each operator needs a quoted value before it, and the first four also need an equals sign and quoted value afterward:
 
 - `EQUALS=`
 - `NOT-EQUALS=`
@@ -338,7 +337,7 @@ Shows a text prompt. You can provide the prompt message in quotes, followed by t
 
 ### RESET-CONTEXT
 
-Resets the context. Commands after this will happen inside the screen, not any specific shape.
+Resets to the top context. Commands after this will happen inside the screen, not any specific shape.
 
 ### SET-COLOR
 

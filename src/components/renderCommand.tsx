@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ContextSettings } from "../data/contextSettings.data";
 import usePreRender from "../hooks/usePreRender";
 import { CommandHandler } from "../types/commandHandler";
+import { ErrorBoundary } from "./errorBoundary";
 import AnimateShapeHandler from "./handlers/animateShape.handler";
 import AnimateTextHandler from "./handlers/animateText.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
@@ -37,7 +38,11 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'ANIMATE-SHAPE': AnimateShapeHandler,
   'ANIMATE-TEXT': AnimateTextHandler,
   'CLEAR': null,
-  'CLOSE': null,
+  'CLOSE-ALL': null,
+  'CLOSE-ALL-POPUPS': null,
+  'CLOSE-ALL-SHAPES': null,
+  'CLOSE-POPUP': null,
+  'CLOSE-SHAPE': null,
   '#DRAW-SHAPE': DrawShapeHandler, // Special internal command, not available to users 
   'FAKE-CODE': FakeCodeHandler,
   'GO-TO': null,
@@ -88,16 +93,26 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
     return <RenderText text={props.command.name + ' command not implemented yet.'} />
   }
 
-  return React.createElement(
-    commandHandlers[commandName]!,
-    { 
-      changeContext: props.changeContext,
-      command: props.command,
-      createContext: props.createContext,
-      done: sendDone,
-      settings: commandSettings,
-      setSettings: props.setSettings,
-    },
-    props.children
-  );
+  return (
+    <ErrorBoundary
+      errorNode={error =>
+        <RenderText text={`Error in ${props.command} command: ${error.message}`} />
+      }
+    >
+      {
+        React.createElement(
+          commandHandlers[commandName]!,
+          { 
+            changeContext: props.changeContext,
+            command: props.command,
+            createContext: props.createContext,
+            done: sendDone,
+            settings: commandSettings,
+            setSettings: props.setSettings,
+          },
+          props.children
+        )
+      }
+    </ErrorBoundary>
+  )
 }
