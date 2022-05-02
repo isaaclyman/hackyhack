@@ -72,15 +72,13 @@ USE-SHAPE {
 USE "left"
 FAKE-CODE 25
 
-SLEEP 3000
+SLEEP 1500
 
 USE "right"
-FAKE-CODE 40
-TEXT "
-Hacking global spy network...
-"
+TEXT "Hacking global spy network..."
+TEXT " "
 
-SLEEP 5000
+SLEEP 2000
 
 PROMPT "Enter password"
 PROMPT "Incorrect! 2 attempts remaining"
@@ -356,7 +354,7 @@ Sets the color of text and icons in the current context. The default is cyberpun
 SET $varname="value"
 ```
 
-Creates or sets a variable named `$varname` to contain the text `value`. All variables names must start with a dollar sign `$`.
+Creates or sets a variable named `$varname` to contain the text `value`. All variables names must start with a dollar sign `$`. Variable names can only contain letters, numbers, and underscores `_`.
 
 ### SLEEP
 

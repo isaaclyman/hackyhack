@@ -28,15 +28,13 @@ USE-SHAPE {
 USE "left"
 FAKE-CODE 25
 
-SLEEP 3000
+SLEEP 1500
 
 USE "right"
-FAKE-CODE 40
-TEXT "
-Hacking global spy network...
-"
+TEXT "Hacking global spy network..."
+TEXT " "
 
-SLEEP 5000
+SLEEP 2000
 
 PROMPT "Enter password"
 PROMPT "Incorrect! 2 attempts remaining"
