@@ -4,7 +4,7 @@ import { DragEvent, useState } from "react"
 export interface DragDropFileProps {
   accept: string
   name: string
-  onChange: (content: string) => any
+  onFile: (name: string, content: string) => any
 }
 
 export default function DragDropFile(props: DragDropFileProps) {
@@ -44,10 +44,10 @@ export default function DragDropFile(props: DragDropFileProps) {
     }
 
     const filereader = new FileReader()
-    filereader.onload = function() {
-      props.onChange(filereader.result as string)
-    }
     const file = ev.dataTransfer.files[0]
+    filereader.onload = function() {
+      props.onFile(file.name, filereader.result as string)
+    }
     filereader.readAsText(file)
   })
 

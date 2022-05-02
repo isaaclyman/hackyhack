@@ -5,7 +5,7 @@ export interface FilePickerProps {
   accept: string
   name: string
   label: string
-  onChange: (content: string) => any
+  onFile: (name: string, content: string) => any
 }
 
 export default function FilePicker(props: FilePickerProps) {
@@ -17,10 +17,10 @@ export default function FilePicker(props: FilePickerProps) {
     }
     
     const filereader = new FileReader()
-    filereader.onload = function() {
-      props.onChange(filereader.result as string)
-    }
     const file = files[0]
+    filereader.onload = function() {
+      props.onFile(file.name, filereader.result as string)
+    }
     filereader.readAsText(file)
   }
 
