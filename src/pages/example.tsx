@@ -12,7 +12,7 @@ const ReadmeExample = raw('../examples/readme-example.kdl')
 const RainbowText = raw('../examples/rainbow-text.kdl')
 
 const examples: ExampleLink[] = [{
-  display: 'README example',
+  display: 'README example: Vault Breaker',
   name: 'ReadmeExample',
   script: ReadmeExample
 }, {
