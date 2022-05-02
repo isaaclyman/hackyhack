@@ -34,6 +34,7 @@ export default function RenderSceneParent(props: React.PropsWithChildren<RenderS
     key={`${props.context.name}__parent`}
     setSettings={props.setSettings}
     settings={props.settings}
+    uniqueKey={props.context.name}
   >
     {isDone ? props.children : null}
   </RenderCommand>

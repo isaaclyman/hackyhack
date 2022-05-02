@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ContextSettings } from "../data/contextSettings.data";
 import usePreRender from "../hooks/usePreRender";
 import { CommandHandler } from "../types/commandHandler";
+import ColorCssGenerator from "./colorCssGenerator";
 import { ErrorBoundary } from "./errorBoundary";
 import AnimateShapeHandler from "./handlers/animateShape.handler";
 import AnimateTextHandler from "./handlers/animateText.handler";
@@ -21,6 +22,7 @@ import ProgressHandler from "./handlers/progress.handler"
 import PromptHandler from "./handlers/prompt.handler";
 import ResetContextHandler from "./handlers/resetContext.handler";
 import SetHandler from "./handlers/set.handler";
+import SetColorHandler from "./handlers/setColor.handler";
 import SleepHandler from "./handlers/sleep.handler";
 import TextHandler from "./handlers/text.handler";
 import UseHandler from "./handlers/use.handler";
@@ -38,6 +40,7 @@ export interface RenderCommandProps {
   insertCommands: (commands: kdljs.Node[]) => void
   setSettings: (settings: ContextSettings) => void
   settings: ContextSettings
+  uniqueKey: string
 }
 
 type GenericObject<T> = {[key: string]: T}
@@ -67,7 +70,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'PROMPT': PromptHandler,
   'PROGRESS': ProgressHandler,
   'RESET-CONTEXT': ResetContextHandler,
-  'SET-COLOR': null,
+  'SET-COLOR': SetColorHandler,
   'SET': SetHandler,
   'SLEEP': SleepHandler,
   'USE-SHAPE': UseShapeHandler,
@@ -114,6 +117,10 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
         <RenderText text={`Error in ${props.command.name} command: ${error.message}`} />
       }
     >
+      <ColorCssGenerator
+        color={props.settings.color}
+        parentClass={`${commandName}__${props.uniqueKey}`}
+      />
       {
         React.createElement(
           commandHandlers[commandName]!,

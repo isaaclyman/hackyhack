@@ -342,9 +342,17 @@ Shows a text prompt. You can provide the prompt message in quotes, followed by t
 
 ### RESET-CONTEXT
 
+```kdl
+RESET-CONTEXT
+```
+
 Resets to the top context. Commands after this will happen inside the screen, not any specific shape.
 
 ### SET-COLOR
+
+```kdl
+SET-COLOR "pink"
+```
 
 Sets the color of text and icons in the current context. The default is cyberpunk blue (#4696f1). You can choose any [CSS color keyword](https://www.w3.org/wiki/CSS/Properties/color/keywords) or a color written in RGB `rgb(255, 255, 255)`, HSL `hsl(0, 100%, 100%)`, or hex `#FFFFFF`.
 
@@ -413,6 +421,10 @@ Creates a shape that can have content or other shapes inside of it.
 Anything that comes after a `USE-SHAPE` command will happen inside of the shape. The shape is its _context._
 
 ### USE "name"
+
+```kdl
+USE "right"
+```
 
 Sets the context to a specific shape. Commands after this will happen inside of the shape whose name was used.
 

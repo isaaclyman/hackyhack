@@ -46,7 +46,7 @@ export default function RenderScene(props: RenderSceneProps) {
     console.log('Created location', name)
     const remainingCommandsSnapshot = remainingCommands.slice(commandIndex + 1)
     locationEventHub.registerLocationSeekHandler(name, () => {
-      console.log('Seeking location', name, remainingCommandsSnapshot)
+      console.log('Seeking location', name)
       setRemainingCommands(remainingCommandsSnapshot.map(command => ({...command})))
       setCommandIndex(0)
     })
@@ -146,6 +146,7 @@ export default function RenderScene(props: RenderSceneProps) {
           key={index}
           setSettings={setAndPropagateSettings}
           settings={settings}
+          uniqueKey={`${selfContextName}__${index}`}
         />
       )}
       {contexts.map(context =>

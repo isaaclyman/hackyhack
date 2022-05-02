@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import Modal from 'react-modal'
+import ColorCssGenerator from './components/colorCssGenerator';
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +10,13 @@ const root = ReactDOM.createRoot(
 );
 Modal.setAppElement('#root')
 root.render(
-  <App />
+  <>
+    <ColorCssGenerator
+      color="rgb(70, 150, 241)"
+      parentClass=""
+    />
+    <App />
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

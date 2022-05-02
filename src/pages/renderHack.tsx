@@ -7,7 +7,6 @@ import usePreRender from '../hooks/usePreRender'
 import contextEventHub from '../services/contextEventHub'
 import locationEventHub from '../services/locationEventHub'
 import popupEventHub from '../services/popupEventHub'
-import { TextAnimation } from '../types/text.animation'
 
 export interface RenderHackLocationState {
   scriptName: string
