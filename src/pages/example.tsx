@@ -1,6 +1,6 @@
 import './examples.scss'
 import raw from 'raw.macro'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 interface ExampleLink {
   display: string
@@ -9,12 +9,17 @@ interface ExampleLink {
 }
 
 const ReadmeExample = raw('../examples/readme-example.kdl')
+const ReadmeOrange = raw('../examples/readme-but-orange.kdl')
 const RainbowText = raw('../examples/rainbow-text.kdl')
 
 const examples: ExampleLink[] = [{
   display: 'README example: Vault Breaker',
   name: 'ReadmeExample',
   script: ReadmeExample
+}, {
+  display: 'Vault Breaker (but in orange this time)',
+  name: 'ReadmeOrange',
+  script: ReadmeOrange
 }, {
   display: 'Rainbow text',
   name: 'RainbowText',

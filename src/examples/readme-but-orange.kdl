@@ -1,0 +1,130 @@
+SET-COLOR "orange"
+
+ANIMATE-TEXT {
+    TYPING
+}
+
+ANIMATE-SHAPE {
+    GROW
+}
+
+USE-SHAPE {
+    RECTANGLE-ROUNDED
+    NAME "left"
+    TOP 0
+    LEFT 0
+    WIDTH 49
+    HEIGHT 100
+}
+
+RESET-CONTEXT
+USE-SHAPE {
+    RECTANGLE-ROUNDED
+    NAME "right"
+    TOP 0
+    LEFT 51
+    WIDTH 49
+    HEIGHT 100
+}
+
+USE "left"
+FAKE-CODE 25
+
+SLEEP 1500
+
+USE "right"
+TEXT "Hacking global spy network..."
+TEXT " "
+
+SLEEP 2000
+
+PROMPT "Enter password"
+PROMPT "Incorrect! 2 attempts remaining"
+PROMPT "Incorrect! 1 attempt remaining"
+TEXT "Logging in..."
+
+POPUP {
+    MESSAGE "Sysadmin alert. Begin detection avoidance algorithm?"
+    BUTTON "Yes" {
+        SET $avoidDetection="yes"
+    }
+    BUTTON "No" {
+        SET $avoidDetection="no"
+    }
+}
+
+IF "$avoidDetection" EQUALS="yes" {
+    RESET-CONTEXT
+    USE-SHAPE {
+        BLANK
+        LAYER 10
+        NAME "detection avoidance"
+        LEFT 0
+        TOP 0
+        WIDTH 100
+        HEIGHT 100
+        TRANSPARENT 10
+    }
+
+    ANIMATE-TEXT {
+        LINE
+    }
+
+    TEXT "Beginning detection avoidance..."
+    SLEEP 500
+    TEXT "Routing network traffic..."
+    SLEEP 500
+    TEXT "Hijacking IoT devices..."
+    SLEEP 800
+    TEXT "DDOS attack begun."
+    SLEEP 200
+    TEXT "Traffic obfuscated."
+    SLEEP 200
+    TEXT "Trojan horse planted."
+    SLEEP 200
+    TEXT "Detection eluded! 45 seconds until next network scan."
+    SLEEP 1000
+    USE "left"
+    CLOSE-SHAPE "detection avoidance"
+}
+
+USE "left"
+CLEAR
+ANIMATE-TEXT {
+    TYPE
+}
+
+PROMPT "Found private files. Download vault code?" "$downloadVaultCode"
+
+IF "$downloadVaultCode" CONTAINS="yes" {
+    TEXT "Downloading vault code..."
+    PROGRESS {
+        TIME 4000
+        SUCCESS
+    }
+    TEXT "Vault code downloaded."
+}
+
+HERE-IS "download files"
+PROMPT "Search for other private file:" "$searchFile"
+
+IF "$searchFile" "NOT-EMPTY" {
+    TEXT "Downloading $searchFile..."
+    PROGRESS {
+        TIME 2000
+        SUCCESS
+    }
+    TEXT "Download complete."
+    GO-TO "download files"
+}
+
+USE "right"
+CLEAR
+
+TEXT "Intrusion detected. Traceless disconnect in 3..."
+SLEEP 1000
+TEXT "2..."
+SLEEP 1000
+TEXT "1..."
+SLEEP 1000
+TEXT "Disconnected."

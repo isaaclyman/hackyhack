@@ -66,7 +66,7 @@ const PromptHandler: CommandHandler = function(props: CommandHandlerProps) {
   }, [])
   
   return (
-    <div className="prompt-handler">
+    <div className={`prompt-handler ${props.className}`}>
       <RenderText
         animation={props.settings.textAnimation}
         className={props.className}

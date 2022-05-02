@@ -103,7 +103,7 @@ const PopupHandler: CommandHandler = function(props: CommandHandlerProps) {
       closeTimeoutMS={500}
       isOpen={isOpen}
       overlayClassName={{
-        base: `popup-overlay ${interpretPosition(position)}`,
+        base: `popup-overlay ${interpretPosition(position)} ${props.className}`,
         afterOpen: 'popup-overlay-afteropen',
         beforeClose: 'popup-overlay-beforeclose'
       }}
