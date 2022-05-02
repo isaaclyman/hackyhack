@@ -10,6 +10,7 @@ import CloseShapeHandler from "./handlers/closeShape.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
 import IfHandler from "./handlers/if.handler";
 import PopupHandler from "./handlers/popup.handler";
+import ProgressHandler from "./handlers/progress.handler"
 import PromptHandler from "./handlers/prompt.handler";
 import ResetContextHandler from "./handlers/resetContext.handler";
 import SetHandler from "./handlers/set.handler";
@@ -55,7 +56,7 @@ const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercas
   'IF': IfHandler,
   'POPUP': PopupHandler,
   'PROMPT': PromptHandler,
-  'PROGRESS': null,
+  'PROGRESS': ProgressHandler,
   'RESET-CONTEXT': ResetContextHandler,
   'SET-COLOR': null,
   'SET': SetHandler,

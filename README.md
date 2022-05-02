@@ -329,8 +329,8 @@ Shows a text-based progress bar that starts at 0% and progresses toward 100%.
 - `MAX` is the maximum percent you want the progress bar to reach.
 - `TIME` is how long it should take (in milliseconds) for the progress bar to complete.
 - The following describe the result of the progress bar, shown to the right once it completes:
-  - `WARNING` shows a warning icon.
   - `ERROR` shows an error icon.
+  - `WARNING` shows a warning icon.
   - `SUCCESS` shows a check mark icon.
   - `TEXT "custom text"` shows custom text.
 
