@@ -36,6 +36,10 @@ const PromptHandler: CommandHandler = function(props: CommandHandlerProps) {
 
   function watchKeyEvents($event: React.KeyboardEvent<HTMLInputElement>) {
     if ($event.key === 'Enter') {
+      if (inputEl.current && variableName) {
+        VariableManager.setVariable(variableName, inputEl.current.value)
+      }
+
       setIsDone(true)
       props.done()
       window.removeEventListener('keyup', refocusInput)
