@@ -29,9 +29,11 @@ const AnimateTextHandler: CommandHandler = function(props) {
         case 'line':
           newSettings.textAnimation = TextAnimation.LINE
           newSettings.textLineAnimationDelay = getAnimationDelay(child.values, defaultLineAnimationDelay)
+          newSettings.textTypeAnimationDelay = 0
           continue
         case 'type':
           newSettings.textAnimation = TextAnimation.TYPE
+          newSettings.textLineAnimationDelay = null
           newSettings.textTypeAnimationDelay = getAnimationDelay(child.values, defaultTypeAnimationDelay)
           continue
         case 'line-type':

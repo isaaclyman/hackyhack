@@ -4,6 +4,7 @@ import { TextAnimation } from '../types/text.animation'
 
 export interface RenderTextProps {
   animation: TextAnimation
+  className: string
   delay: number
   done: () => void
   style: React.CSSProperties
@@ -40,7 +41,7 @@ export default function RenderText(props: RenderTextProps) {
   }, [typingIndex, fullText, props.delay, props.animation])
 
   return (
-    <div style={{whiteSpace: 'pre', ...props.style}} ref={el}>
+    <div style={{whiteSpace: 'pre', ...props.style}} ref={el} className={props.className}>
       {props.animation === TextAnimation.TYPE ?
         (fullText.slice(0, typingIndex) || ' ') :
         fullText

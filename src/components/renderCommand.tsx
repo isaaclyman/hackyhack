@@ -84,6 +84,7 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
   const commandName = props.command.name.toLowerCase()
 
   const [commandSettings] = useState(props.settings)
+  const className = `${commandName}__${props.uniqueKey}`
 
   function sendDone() {
     if (hasSentDone.current) {
@@ -108,24 +109,25 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
   }, [rendered, commandName, props.done])
 
   if (!commandHandlers[commandName]) {
-    return <RenderText text={props.command.name + ' command not implemented yet.'} />
+    return <RenderText className={className} text={props.command.name + ' command not implemented yet.'} />
   }
 
   return (
     <ErrorBoundary
       errorNode={error =>
-        <RenderText text={`Error in ${props.command.name} command: ${error.message}`} />
+        <RenderText className={className} text={`Error in ${props.command.name} command: ${error.message}`} />
       }
     >
       <ColorCssGenerator
-        color={props.settings.color}
-        parentClass={`${commandName}__${props.uniqueKey}`}
+        color={commandSettings.color}
+        parentClass={className}
       />
       {
         React.createElement(
           commandHandlers[commandName]!,
           { 
             changeContext: props.changeContext,
+            className,
             clearContext: props.clearContext,
             command: props.command,
             createContext: props.createContext,

@@ -3,7 +3,7 @@ import { kdljs } from "kdljs"
 export type ContextCloseHandler = () => void
 export type ContextRevertHandler = () => void
 export type ContextSwitchHandler = (remainingCommands: kdljs.Node[]) => void
-export const TopContextName = '$__top'
+export const TopContextName = '00__top'
 
 class ContextEventHub {
   private closeHandlers: {[contextName: string]: ContextCloseHandler} = {}
@@ -50,6 +50,7 @@ class ContextEventHub {
 
   reset() {
     this.closeHandlers = {}
+    this.revertHandlers = {}
     this.switchHandlers = {}
   }
 

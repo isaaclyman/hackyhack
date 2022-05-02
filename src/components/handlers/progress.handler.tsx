@@ -75,6 +75,7 @@ const ProgressHandler: CommandHandler = function(props: CommandHandlerProps) {
   return (
     <RenderText
       animation={TextAnimation.NONE}
+      className={props.className}
       delay={0}
       text={
         `${progressBar.join('')} ${currentProgress >= max ? '' : `${currentProgress.toFixed(2)}%`}`

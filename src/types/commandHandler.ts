@@ -3,6 +3,7 @@ import { ContextSettings } from "../data/contextSettings.data"
 
 export interface CommandHandlerProps {
   changeContext: (contextName: string) => void
+  className: string
   clearContext: () => void
   command: kdljs.Node
   createContext: (contextName: string, parentNode: kdljs.Node) => void

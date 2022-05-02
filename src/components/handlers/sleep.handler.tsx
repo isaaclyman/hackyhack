@@ -33,6 +33,7 @@ const SleepHandler: CommandHandler = function (props: CommandHandlerProps) {
 
   return <RenderText
     animation={TextAnimation.NONE}
+    className={props.className}
     delay={0}
     style={{fontWeight: 'bold'}}
     text={!isDone && isBlinkOn ? '_' : ' '}

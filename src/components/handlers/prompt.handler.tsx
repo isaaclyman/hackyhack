@@ -69,6 +69,7 @@ const PromptHandler: CommandHandler = function(props: CommandHandlerProps) {
     <div className="prompt-handler">
       <RenderText
         animation={props.settings.textAnimation}
+        className={props.className}
         delay={props.settings.textTypeAnimationDelay}
         done={() => setIsPromptRendered(true)}
         text={promptText}

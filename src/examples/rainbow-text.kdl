@@ -1,0 +1,24 @@
+ANIMATE-TEXT {
+  LINE-TYPE
+}
+
+SET-COLOR "red"
+FAKE-CODE 1
+
+SET-COLOR "orange"
+FAKE-CODE 1
+
+SET-COLOR "yellow"
+FAKE-CODE 1
+
+SET-COLOR "green"
+FAKE-CODE 1
+
+SET-COLOR "blue"
+FAKE-CODE 1
+
+SET-COLOR "indigo"
+FAKE-CODE 1
+
+SET-COLOR "violet"
+FAKE-CODE 1

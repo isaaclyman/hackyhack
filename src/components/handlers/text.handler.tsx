@@ -28,6 +28,7 @@ const TextHandler: CommandHandler = function (props: CommandHandlerProps) {
     {lines.map((line, index) =>
       <RenderText
         animation={props.settings.textAnimation}
+        className={props.className}
         delay={props.settings.textTypeAnimationDelay}
         done={() => lineDone(index)}
         key={index}

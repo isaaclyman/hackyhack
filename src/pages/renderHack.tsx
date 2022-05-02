@@ -28,10 +28,10 @@ export default function RenderHack() {
   const parsed = parse(state.script)
   return parsed.errors && parsed.errors.length ?
     <>
-      <RenderText text="Found formatting errors in your scene file:" />
+      <RenderText className="scene-error" text="Found formatting errors in your scene file:" />
       {JSON.stringify(parsed.errors)}
     </>
-  : !parsed.output || !parsed.output.length ? <RenderText text="Scene file is empty." />
+  : !parsed.output || !parsed.output.length ? <RenderText className="scene-empty" text="Scene file is empty." />
   : <RenderScene
       commands={parsed.output}
       settings={settings}
