@@ -5,6 +5,8 @@ import RenderText from '../components/renderText'
 import { ContextSettings } from '../data/contextSettings.data'
 import usePreRender from '../hooks/usePreRender'
 import contextEventHub from '../services/contextEventHub'
+import locationEventHub from '../services/locationEventHub'
+import popupEventHub from '../services/popupEventHub'
 import { TextAnimation } from '../types/text.animation'
 
 export interface RenderHackLocationState {
@@ -17,6 +19,8 @@ export default function RenderHack() {
 
   usePreRender(() => {
     contextEventHub.reset()
+    popupEventHub.reset()
+    locationEventHub.reset()
   })
 
   const settings = new ContextSettings()

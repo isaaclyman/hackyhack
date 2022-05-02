@@ -20,6 +20,16 @@ class PopupEventHub {
 
     this.closeEventHandlers[popupName]()
   }
+
+  triggerCloseAll() {
+    for (const key in this.closeEventHandlers) {
+      if (!this.closeEventHandlers.hasOwnProperty(key)) {
+        continue
+      }
+
+      this.closeEventHandlers[key]()
+    }
+  }
 }
 
 export default new PopupEventHub()

@@ -4,12 +4,18 @@ import { ContextSettings } from '../data/contextSettings.data'
 import RenderCommand from './renderCommand'
 import ContextEventHub, { TopContextName } from '../services/contextEventHub'
 import RenderSceneParent, { ContextGrouping } from './renderSceneParent'
+import locationEventHub from '../services/locationEventHub'
 
 export interface RenderSceneProps {
   commands: kdljs.Node[]
   contextName?: string
   setSettings: (settings: ContextSettings) => void
   settings?: ContextSettings
+}
+
+interface LocationMarker {
+  name: string
+  remainingCommands: kdljs.Node[]
 }
 
 const topLevelContextName = TopContextName
@@ -29,6 +35,21 @@ export default function RenderScene(props: RenderSceneProps) {
 
   function changeContext(contextName: string): void {
     ContextEventHub.switchContext(contextName, remainingCommands.slice(commandIndex + 1))
+  }
+
+  function clearContext() {
+    setRenderedCommands([])
+    setContexts([])
+  }
+
+  function createLocationMarker(name: string) {
+    console.log('Created location', name)
+    const remainingCommandsSnapshot = remainingCommands.slice(commandIndex + 1)
+    locationEventHub.registerLocationSeekHandler(name, () => {
+      console.log('Seeking location', name, remainingCommandsSnapshot)
+      setRemainingCommands(remainingCommandsSnapshot.map(command => ({...command})))
+      setCommandIndex(0)
+    })
   }
 
   function createNewContext(contextName: string, parentNode: kdljs.Node): void {
@@ -79,8 +100,6 @@ export default function RenderScene(props: RenderSceneProps) {
   }
 
   useEffect(() => {
-    console.log(selfContextName, 'has commands', remainingCommands)
-
     ContextEventHub.registerContextSwitchHandler(selfContextName, remainingCommands => {
       console.log(selfContextName, 'received context')
       setRemainingCommands(remainingCommands)
@@ -118,8 +137,10 @@ export default function RenderScene(props: RenderSceneProps) {
       {renderedCommands.map((command, index) =>
         <RenderCommand
           changeContext={changeContext}
+          clearContext={clearContext}
           command={command}
           createContext={createNewContext}
+          createLocationMarker={createLocationMarker}
           done={processNext}
           insertCommands={insertCommands}
           key={index}
@@ -130,7 +151,9 @@ export default function RenderScene(props: RenderSceneProps) {
       {contexts.map(context =>
         <RenderSceneParent
           changeContext={changeContext}
+          clearContext={clearContext}
           context={context}
+          createLocationMarker={createLocationMarker}
           createNewContext={createNewContext}
           insertCommands={insertCommands}
           key={context.name}

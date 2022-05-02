@@ -6,8 +6,15 @@ import { CommandHandler } from "../types/commandHandler";
 import { ErrorBoundary } from "./errorBoundary";
 import AnimateShapeHandler from "./handlers/animateShape.handler";
 import AnimateTextHandler from "./handlers/animateText.handler";
+import ClearHandler from "./handlers/clear.handler";
+import CloseAllHandler from "./handlers/closeAll.handler";
+import CloseAllPopupsHandler from "./handlers/closeAllPopups.handler";
+import CloseAllShapesHandler from "./handlers/closeAllShapes.handler";
+import ClosePopupHandler from "./handlers/closePopup.handler";
 import CloseShapeHandler from "./handlers/closeShape.handler";
 import FakeCodeHandler from "./handlers/fakeCode.handler";
+import GoToHandler from "./handlers/goTo.handler";
+import HereIsHandler from "./handlers/hereIs.handler";
 import IfHandler from "./handlers/if.handler";
 import PopupHandler from "./handlers/popup.handler";
 import ProgressHandler from "./handlers/progress.handler"
@@ -23,8 +30,10 @@ import RenderText from "./renderText";
 
 export interface RenderCommandProps {
   changeContext: (contextName: string) => void
+  clearContext: () => void
   command: kdljs.Node
   createContext: (contextName: string, parentNode: kdljs.Node) => void
+  createLocationMarker: (name: string) => void
   done: () => any
   insertCommands: (commands: kdljs.Node[]) => void
   setSettings: (settings: ContextSettings) => void
@@ -43,16 +52,16 @@ const lowercaseKeys = function<T>(obj: GenericObject<T>): GenericObject<T> {
 const commandHandlers: {[commandName: string]: CommandHandler | null} = lowercaseKeys({
   'ANIMATE-SHAPE': AnimateShapeHandler,
   'ANIMATE-TEXT': AnimateTextHandler,
-  'CLEAR': null,
-  'CLOSE-ALL': null,
-  'CLOSE-ALL-POPUPS': null,
-  'CLOSE-ALL-SHAPES': null,
-  'CLOSE-POPUP': null,
+  'CLEAR': ClearHandler,
+  'CLOSE-ALL': CloseAllHandler,
+  'CLOSE-ALL-POPUPS': CloseAllPopupsHandler,
+  'CLOSE-ALL-SHAPES': CloseAllShapesHandler,
+  'CLOSE-POPUP': ClosePopupHandler,
   'CLOSE-SHAPE': CloseShapeHandler,
   '#DRAW-SHAPE': DrawShapeHandler, // Special internal command, not available to users 
   'FAKE-CODE': FakeCodeHandler,
-  'GO-TO': null,
-  'HERE-IS': null,
+  'GO-TO': GoToHandler,
+  'HERE-IS': HereIsHandler,
   'IF': IfHandler,
   'POPUP': PopupHandler,
   'PROMPT': PromptHandler,
@@ -110,8 +119,10 @@ export default function RenderCommand(props: React.PropsWithChildren<RenderComma
           commandHandlers[commandName]!,
           { 
             changeContext: props.changeContext,
+            clearContext: props.clearContext,
             command: props.command,
             createContext: props.createContext,
+            createLocationMarker: props.createLocationMarker,
             done: sendDone,
             insertCommands: props.insertCommands,
             settings: commandSettings,

@@ -11,7 +11,9 @@ export interface ContextGrouping {
 
 export interface RenderSceneParentProps {
   changeContext: (contextName: string) => void
+  clearContext: () => void
   context: ContextGrouping
+  createLocationMarker: (name: string) => void
   createNewContext: (contextName: string, parentNode: kdljs.Node) => void
   insertCommands: (commands: kdljs.Node[]) => void
   setSettings: (settings: ContextSettings) => void
@@ -23,8 +25,10 @@ export default function RenderSceneParent(props: React.PropsWithChildren<RenderS
 
   return <RenderCommand
     changeContext={props.changeContext}
+    clearContext={props.clearContext}
     command={props.context.parentNode}
     createContext={props.createNewContext}
+    createLocationMarker={props.createLocationMarker}
     done={() => setIsDone(true)}
     insertCommands={props.insertCommands}
     key={`${props.context.name}__parent`}
