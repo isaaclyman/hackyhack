@@ -443,7 +443,7 @@ A layer can't win over a layer in a higher context! For example, if Context A is
 You can use the following in any text:
 
 - `$variable` uses the value of a variable you've previously set.
-- `:icon:` shows the corresponding icon. Available icons:
+- `:icon:` shows the corresponding icon (**_not yet implemented_). Available icons:
   - `:info:`
   - `:warning:`
   - `:error:`
