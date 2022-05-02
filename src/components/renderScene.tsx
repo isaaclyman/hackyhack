@@ -85,7 +85,7 @@ export default function RenderScene(props: RenderSceneProps) {
   function insertCommands(commands: kdljs.Node[]) {
     setRemainingCommands(remainingCommands => {
       const newRemainingCommands = remainingCommands.slice()
-      newRemainingCommands.splice(commandIndex + 1, 0, ...commands)
+      newRemainingCommands.splice(commandIndex + 1, 0, ...commands.map(command => ({...command})))
       return newRemainingCommands
     })
   }
