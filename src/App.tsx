@@ -6,7 +6,7 @@ import Start from './pages/start';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/hackyhack'>
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/example" element={<Example />} />
