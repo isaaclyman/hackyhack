@@ -2,7 +2,9 @@
 
 **Script a Hollywood-style hacking scene that runs in your browser.**
 
-Hacky hack is a web application that makes it look like you're hacking a computer network in an action-packed TV show. You write the script and you decide what happens.
+Hacky hack is a web application that makes it look like you're hacking a computer network in an action-packed TV show. You write the script, you decide what happens.
+
+![Demo](DEMO.gif)
 
 - [Hacky hack](#hacky-hack)
   - [Setup](#setup)
